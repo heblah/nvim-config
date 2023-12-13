@@ -71,7 +71,7 @@ return {
 
 		  -- Useful status updates for LSP
 		  -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-		  { 'j-hui/fidget.nvim', opts = {} },
+		  {'j-hui/fidget.nvim', opts = {}},
 
 		  -- Additional lua configuration, makes nvim stuff amazing!
 		  'folke/neodev.nvim',
@@ -91,18 +91,13 @@ return {
 		  },
 		},
 	},
-	{"akinsho/nvim-toggleterm.lua", version = "*",
-		config = true, opts = {}
-	},
-	--[[
 	{-- Plugins to get terminals using telescope
 		"ryanmsnyder/toggleterm-manager.nvim",
 		dependencies = {
-			{"akinsho/nvim-toggleterm.lua", version = "*", opts = {}},
+			{'akinsho/toggleterm.nvim', version = "*"},
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim", -- only needed because it's a dependency of telescope
 		},
 		config = true,
 	},
-	]]
 }

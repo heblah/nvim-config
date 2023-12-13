@@ -23,45 +23,6 @@ vim.opt.listchars = {
 vim.o.clipboard = 'unnamedplus'
 
 ------
--- Plugins manager: lazy
-------
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
--- List of plugins with basic configurations
-require("lazy").setup('plugins')
-
--- Extended plugin configuration files when needed
-require("nvim-cmp")
-require("telescope")
---require("toggleterm")
---require("lua.lsp")
-
-------
--- Neovim scheme color depending on hour: light during day and dark when night is coming
-------
-vim.g.termguicolors = true
-vim.cmd("color vscode")
-local light_start = 9
-local light_end = 18
-local hour = tonumber(vim.fn.strftime("%H"))
-
-if hour >= light_start and hour < light_end then
-  vim.o.background = "light"
-else
-  vim.o.background = "dark"
-end
-
-------
 -- Neovim autocommands
 ------
 -- Go in insert mode when entering in a Neovim terminal
@@ -84,8 +45,11 @@ vim.api.nvim_create_autocmd({"BufWinEnter","WinEnter"}, {
 ------
 -- Esc key:
 vim.keymap.set({'i'}, 'jj', '<ESC>:w<CR>', {silent = true})
--- Save current buffer:
+-- Save / quit current buffer:
 vim.keymap.set({'n', 'i'}, '<Leader>w', '<ESC>:w<CR>', {silent = true})
+vim.keymap.set({'n', 'i'}, '<Leader>W', '<ESC>:wa<CR>', {silent = true})
+vim.keymap.set({'n', 'i'}, '<Leader>q', '<ESC>:q<CR>', {silent = true})
+vim.keymap.set({'n', 'i'}, '<Leader>Q', '<ESC>:wqa<CR>', {silent = true})
 -- Open terminal:
 vim.keymap.set({'n', 'i'}, '<Leader>t', '<ESC>:vsplit term://zsh<CR>')
 vim.keymap.set({'n', 'i'}, '<Leader><S-t>', '<ESC>:split term://zsh<CR>')
@@ -105,3 +69,42 @@ vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>')
 -- NvimTree toggle
 vim.keymap.set('n', '<Leader>e', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<Leader>E', ':NvimTreeFocus<CR>')
+
+------
+-- Plugins manager: lazy
+------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+-- List of plugins with basic configurations
+require("lazy").setup('plugins')
+
+-- Extended plugin configuration files when needed
+require("cmp-cfg")
+require("telescope-cfg")
+require("toggleterm-cfg")
+--require("lua-cfg.lsp")
+
+------
+-- Neovim scheme color depending on hour
+------
+vim.g.termguicolors = true
+vim.cmd("color vscode")
+local light_start = 9
+local light_end = 18
+local hour = tonumber(vim.fn.strftime("%H"))
+
+if hour >= light_start and hour < light_end then
+  vim.o.background = "light"
+else
+  vim.o.background = "dark"
+end
