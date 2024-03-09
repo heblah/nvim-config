@@ -15,7 +15,7 @@ vim.o.hidden = true
 toggleterm.setup{
 	direction = 'float',
 	float_opts = {
-		border = 'single'
+		border = 'curved'
 	}
 }
 vim.keymap.set({'n', 'i'}, '<Leader>t', '<ESC>:ToggleTerm<CR>')

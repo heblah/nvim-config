@@ -92,7 +92,7 @@ require("lazy").setup('plugins')
 require("cmp-cfg")
 require("telescope-cfg")
 require("toggleterm-cfg")
---require("lua-cfg.lsp")
+require("lsp-cfg")
 
 ------
 -- Neovim scheme color depending on hour

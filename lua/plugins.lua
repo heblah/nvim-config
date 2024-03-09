@@ -1,5 +1,5 @@
 ---------------------------------------------
--- Plugins list
+-- Plugins list with basic configuration if possible, dedicated cfg file otherwise
 ---------------------------------------------
 
 return {
